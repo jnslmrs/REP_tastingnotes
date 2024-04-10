@@ -1,1 +1,97 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasting Notes Practice</title>
+</head>
+<body>
+    <h1>Tasting Notes Practice</h1>
 
+    <script>
+        const tastingNotes = {
+            "Cabernet Sauvignon": ["zwarte kers", "zwarte bes", "cederhout", "kaneel", "grafiet"],
+            "Chardonnay": ["citroen", "appel", "boter", "vanille", "ananas"],
+            "Merlot": ["pruim", "kers", "chocolade", "munt", "aardbei"],
+            "Pinot Noir": ["kers", "aardbei", "pruim", "aarde", "kaneel"],
+            "Sauvignon Blanc": ["gras", "kruidachtig", "kruisbes", "citroen", "groene appel"],
+            "Syrah": ["zwarte bes", "peper", "viooltje", "gerookt vlees", "laurier"],
+            "Riesling": ["limoen", "groene appel", "perzik", "mineraal", "petrol"],
+            "Zinfandel": ["framboos", "zwarte bes", "kruiden", "zoethout", "peper"],
+            "Malbec": ["zwarte bes", "pruim", "kers", "aarde", "chocolade"],
+            "Grenache": ["aardbei", "framboos", "granaatappel", "kruiden", "peper"],
+            "Sangiovese": ["kers", "aardbei", "tomaatblad", "leder", "tabak"],
+            "Tempranillo": ["kers", "aardbei", "leer", "tabak", "vanille"],
+            "Viognier": ["perzik", "abrikoos", "peer", "bloemen", "honing"],
+            "Gewürztraminer": ["lychee", "rozenblaadjes", "passievrucht", "gember", "kruidnagel"],
+            "Cabernet Franc": ["framboos", "violet", "groene peper", "tabak", "aardse tonen"],
+            "Chenin Blanc": ["groene appel", "citrus", "honing", "perzik", "amandel"],
+            "Nebbiolo": ["kers", "roos", "truffel", "tabak", "teer"],
+            "Moscato": ["perzik", "abrikoos", "peren", "bloesem", "munt"],
+            "Petit Verdot": ["zwarte kers", "violet", "ceder", "tabak", "kruiden"],
+            "Albariño": ["citrus", "groene appel", "perzik", "amandel", "ziltig"],
+            "Grüner Veltliner": ["groene appel", "citroen", "perzik", "witte peper", "mineraal"],
+            "Mourvèdre": ["zwarte bes", "pruim", "vijg", "tabak", "leer"],
+            "Carménère": ["zwarte bes", "groene peper", "tabak", "chocolade", "vanille"],
+            "Vermentino": ["citrus", "groene appel", "perzik", "amandel", "ziltig"]
+        };
+
+        function startPractice() {
+            while (true) {
+                let grape = prompt("Welke druif wil je oefenen? (Let op, correcte schrijfwijze is wel belangrijk!)").trim().toLowerCase();
+                console.log("Antwoord 'Geen' als je wil stoppen.");
+
+                if (grape === 'geen') {
+                    console.log("Bedankt voor het gebruik van de test. Tot ziens!");
+                    break;
+                }
+
+                if (grape in tastingNotes) {
+                    let answer = prompt("Wat zijn de voornaamste tasting notes van " + grape + "? Zet er een komma tussen!").toLowerCase().split(", ");
+
+                    let correctAnswers = 0;
+                    let incorrectAnswers = [];
+
+                    for (let note of answer) {
+                        if (tastingNotes[grape].includes(note)) {
+                            correctAnswers++;
+                        } else {
+                            incorrectAnswers.push(note);
+                        }
+                    }
+
+                    if (correctAnswers === tastingNotes[grape].length) {
+                        console.log("Je antwoord is volledig correct!");
+                    } else if (correctAnswers > 0) {
+                        console.log("Je antwoord is gedeeltelijk correct! Je hebt " + correctAnswers + " van de " + tastingNotes[grape].length + " juiste tasting notes geraden.");
+                        console.log("Je hebt de volgende items goed geraden:");
+                        for (let note of tastingNotes[grape]) {
+                            if (answer.includes(note)) {
+                                console.log("-", note);
+                            }
+                        }
+                        console.log("Je hebt de volgende items gemist:");
+                        for (let note of tastingNotes[grape]) {
+                            if (!answer.includes(note)) {
+                                console.log("-", note);
+                            }
+                        }
+                        console.log("De volgende items kunnen wel voorkomen maar zijn minder kenmerkend:");
+                        for (let note of answer) {
+                            if (!tastingNotes[grape].includes(note)) {
+                                console.log("-", note);
+                            }
+                        }
+                    } else {
+                        console.log("Je antwoord is onjuist. De correcte tasting notes zijn: ", tastingNotes[grape].join(", "));
+                    }
+                }
+
+                console.log();
+            }
+        }
+
+        startPractice(); // Start the practice session
+    </script>
+</body>
+</html>
